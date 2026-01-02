@@ -1,0 +1,80 @@
+package com.flightease.dao;
+
+import com.flightease.config.KoneksiDB;
+import java.sql.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.time.Year;
+
+public class DashboardDAO {
+
+    // 1. Hitung Total User
+    public int getTotalUsers() {
+        return getCount("SELECT COUNT(*) FROM users");
+    }
+
+    // 2. Hitung Total Flights
+    public int getTotalFlights() {
+        return getCount("SELECT COUNT(*) FROM flights");
+    }
+
+    // 3. Hitung Total Bookings
+    public int getTotalBookings() {
+        return getCount("SELECT COUNT(*) FROM bookings");
+    }
+
+    // 4. Hitung Total Pendapatan (Sum)
+    public double getTotalRevenue() {
+        double total = 0;
+        try (Connection conn = KoneksiDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT SUM(total_price) FROM bookings")) {
+            if (rs.next()) {
+                total = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    // Helper method untuk hitung COUNT
+    private int getCount(String sql) {
+        int count = 0;
+        try (Connection conn = KoneksiDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    public Map<Integer, Double> getMonthlyRevenue() {
+        Map<Integer, Double> data = new HashMap<>();
+        // Inisialisasi semua bulan dengan 0 agar grafiknya rapi (tidak ada bulan yang bolong)
+        for (int i = 1; i <= 12; i++) {
+            data.put(i, 0.0);
+        }
+
+        int currentYear = Year.now().getValue(); // Ambil tahun saat ini
+
+        // Query PostgreSQL untuk ekstrak bulan dan jumlahkan harga
+        String sql = "SELECT EXTRACT(MONTH FROM booking_date) AS bulan, SUM(total_price) AS total "
+                + "FROM bookings "
+                + "WHERE EXTRACT(YEAR FROM booking_date) = ? "
+                + "GROUP BY bulan ORDER BY bulan";
+
+        try (Connection conn = KoneksiDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, currentYear);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Masukkan data dari database ke Map (menimpa nilai 0 tadi)
+                data.put(rs.getInt("bulan"), rs.getDouble("total"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+}
