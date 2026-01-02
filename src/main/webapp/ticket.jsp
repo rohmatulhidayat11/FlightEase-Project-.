@@ -108,7 +108,6 @@
 </div>
 
 <style>
-    /* CSS untuk menyembunyikan elemen lain saat Print */
     @media print {
         body * {
 visibility: hidden;
@@ -127,6 +126,6 @@ border: 1px solid #000;
 }
         .btn {
 display: none;
-} /* Sembunyikan tombol print */
+} 
     }
 </style>

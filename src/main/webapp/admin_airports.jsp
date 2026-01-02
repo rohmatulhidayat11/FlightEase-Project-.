@@ -8,7 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.flightease.dao.AirportDAO"%>
 <%
-    // Ambil data terbaru langsung dari DAO
+    
     AirportDAO dao = new AirportDAO();
     List<Airport> list = dao.getAllAirports();
 %>

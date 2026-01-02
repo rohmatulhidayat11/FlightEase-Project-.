@@ -9,7 +9,6 @@
 <%@page import="java.util.List"%>
 <%@page import="com.flightease.dao.BookingDAO"%>
 <%
-    // Ambil SEMUA data booking
     BookingDAO dao = new BookingDAO();
     List<Booking> list = dao.getAllBookings();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

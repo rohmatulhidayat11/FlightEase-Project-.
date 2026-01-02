@@ -10,7 +10,7 @@
     int totalBookings = dao.getTotalBookings();
     double totalRevenue = dao.getTotalRevenue();
 
-    // Ambil data pendapatan bulanan
+
     Map<Integer, Double> monthlyData = dao.getMonthlyRevenue();
     int currentYear = Year.now().getValue();
 
@@ -98,14 +98,14 @@
     const revenueChart = new Chart(ctx, {
         type: 'bar', // Jenis grafik: Batang
         data: {
-            labels: labels, // Label sumbu X (Bulan)
+            labels: labels, 
             datasets: [{
                     label: 'Pendapatan (Rp)',
-                    data: dataPendapatan, // Data sumbu Y (Nilai Rupiah)
-                    backgroundColor: 'rgba(25, 135, 84, 0.6)', // Warna batang (Hijau transparan)
-                    borderColor: 'rgba(25, 135, 84, 1)', // Warna garis pinggir
+                    data: dataPendapatan,
+                    backgroundColor: 'rgba(25, 135, 84, 0.6)', 
+                    borderColor: 'rgba(25, 135, 84, 1)', 
                     borderWidth: 1,
-                    borderRadius: 5 // Biar batangnya agak bulat
+                    borderRadius: 5 
                 }]
         },
         options: {
@@ -115,7 +115,7 @@
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        // Format angka di sumbu Y jadi Rupiah (biar rapi)
+                        
                         callback: function (value, index, values) {
                             return 'Rp ' + value.toLocaleString('id-ID');
                         }
@@ -125,7 +125,7 @@
             plugins: {
                 tooltip: {
                     callbacks: {
-                        // Format tooltip saat mouse di-hover
+                        
                         label: function (context) {
                             let label = context.dataset.label || '';
                             if (label) {

@@ -21,28 +21,25 @@ public class FlightServlet extends HttpServlet {
 
         try {
             if (action != null && action.equals("add")) {
-                // --- LOGIKA TAMBAH JADWAL ---
+                // LOGIKA TAMBAH JADWAL
                 String no = request.getParameter("flight_number");
                 int origin = Integer.parseInt(request.getParameter("origin_id"));
                 int dest = Integer.parseInt(request.getParameter("destination_id"));
                 double price = Double.parseDouble(request.getParameter("price"));
 
-                // --- PERBAIKAN FORMAT TANGGAL ---
-                String dateStr = request.getParameter("departure_time"); // Dapatnya: "2026-01-01T13:54"
+                // FORMAT TANGGAL
+                String dateStr = request.getParameter("departure_time"); 
 
-                // Cek apakah user mengisi tanggal atau kosong
                 if (dateStr != null && !dateStr.isEmpty()) {
-                    // Ubah "T" jadi spasi
                     String cleanDate = dateStr.replace("T", " ");
 
-                    // Jika detiknya tidak ada, tambahkan ":00"
                     if (cleanDate.length() == 16) {
                         cleanDate += ":00";
                     }
 
                     Flight f = new Flight();
                     f.setFlightNumber(no);
-                    f.setDepartureTime(Timestamp.valueOf(cleanDate)); // Masukkan Timestamp yang sudah bersih
+                    f.setDepartureTime(Timestamp.valueOf(cleanDate)); 
                     f.setPrice(price);
 
                     dao.addFlight(f, origin, dest);
@@ -51,7 +48,7 @@ public class FlightServlet extends HttpServlet {
                 }
 
             } else if (action != null && action.equals("delete")) {
-                // --- LOGIKA HAPUS JADWAL ---
+                //LOGIKA HAPUS JADWAL
                 String idStr = request.getParameter("id");
                 if (idStr != null) {
                     int id = Integer.parseInt(idStr);
@@ -59,11 +56,9 @@ public class FlightServlet extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-            // Jika ada error, print ke Output Netbeans biar ketahuan kenapa
             e.printStackTrace();
         }
 
-        // Balik lagi ke halaman Admin Flights
         response.sendRedirect("index.jsp?halaman=kelola_flights");
     }
 

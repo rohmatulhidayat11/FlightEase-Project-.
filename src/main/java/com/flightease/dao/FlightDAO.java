@@ -16,9 +16,6 @@ public class FlightDAO {
     // Fungsi Pencarian Penerbangan
     public List<Flight> searchFlights(int originId, int destId, String dateStr) {
         List<Flight> list = new ArrayList<>();
-
-        // Query Join agar dapat nama kota
-        // CAST(departure_time AS DATE) digunakan untuk membandingkan tanggal saja (abaikan jam)
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
                 + "ao.city AS origin_city, ao.code AS origin_code, "
                 + "ad.city AS dest_city, ad.code AS dest_code "
@@ -33,7 +30,7 @@ public class FlightDAO {
 
             ps.setInt(1, originId);
             ps.setInt(2, destId);
-            ps.setString(3, dateStr); // Format string 'YYYY-MM-DD' dari form HTML
+            ps.setString(3, dateStr);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -42,14 +39,10 @@ public class FlightDAO {
                 f.setFlightNumber(rs.getString("flight_number"));
                 f.setDepartureTime(rs.getTimestamp("departure_time"));
                 f.setPrice(rs.getDouble("price"));
-
-                // Set Data Bandara Asal (Origin)
                 Airport origin = new Airport();
                 origin.setCity(rs.getString("origin_city"));
                 origin.setCode(rs.getString("origin_code"));
                 f.setOrigin(origin);
-
-                // Set Data Bandara Tujuan (Destination)
                 Airport dest = new Airport();
                 dest.setCity(rs.getString("dest_city"));
                 dest.setCode(rs.getString("dest_code"));
@@ -62,7 +55,6 @@ public class FlightDAO {
         }
         return list;
     }
-    // Tambahkan ini di dalam class FlightDAO
     public Flight getFlightById(int id) {
         Flight f = null;
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
@@ -100,10 +92,8 @@ public class FlightDAO {
         }
         return f;
     }
-    // --- Method KHUSUS ADMIN: Ambil Semua Penerbangan ---
     public List<Flight> getAllFlights() {
         List<Flight> list = new ArrayList<>();
-        // Query ini mengambil semua flight tanpa filter, diurutkan dari yang terbaru
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
                 + "ao.city AS origin_city, ao.code AS origin_code, "
                 + "ad.city AS dest_city, ad.code AS dest_code "
@@ -138,8 +128,6 @@ public class FlightDAO {
         }
         return list;
     }
-
-    // --- Method Tambah Flight (Untuk Form Admin) ---
     public boolean addFlight(Flight f, int originId, int destId) {
         String sql = "INSERT INTO flights (flight_number, origin_id, destination_id, departure_time, price) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = KoneksiDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -154,8 +142,6 @@ public class FlightDAO {
             return false;
         }
     }
-
-    // --- Method Hapus Flight (Untuk Tombol Delete Admin) ---
     public boolean deleteFlight(int id) {
         String sql = "DELETE FROM flights WHERE id = ?";
         try (Connection conn = KoneksiDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {

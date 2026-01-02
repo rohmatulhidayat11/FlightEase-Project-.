@@ -20,9 +20,7 @@ import jakarta.servlet.http.HttpSession;
 public class BookingProcessServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        // 1. Ambil User dari Session
+            throws ServletException, IOException {      
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -30,23 +28,19 @@ public class BookingProcessServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
-
-        // 2. Ambil Data Form
         int flightId = Integer.parseInt(request.getParameter("flight_id"));
         String pName = request.getParameter("passenger_name");
         String pIdentity = request.getParameter("identity_number");
 
-        // 3. Ambil Harga Tiket (Biar aman, ambil dari DB lagi, jangan dari hidden form)
         FlightDAO fDao = new FlightDAO();
         Flight f = fDao.getFlightById(flightId);
-        double totalPrice = f.getPrice(); // Asumsi 1 penumpang dulu
+        double totalPrice = f.getPrice(); 
 
-        // 4. Simpan ke Database
+        //Simpan ke Database
         BookingDAO bookingDao = new BookingDAO();
         boolean sukses = bookingDao.simpanPemesanan(user.getId(), flightId, totalPrice, pName, pIdentity);
 
         if (sukses) {
-            // Redirect ke halaman sukses / riwayat
             response.sendRedirect("index.jsp?halaman=riwayat&status=sukses");
         } else {
             response.sendRedirect("index.jsp?halaman=booking_form&flight_id=" + flightId + "&error=gagal");

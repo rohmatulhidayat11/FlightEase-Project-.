@@ -6,7 +6,6 @@
 
 <%@page import="com.flightease.model.User"%>
 <%
-    // Ambil user dari session
     User userNav = (User) session.getAttribute("user");
     String role = (userNav != null) ? userNav.getRole() : "";
 %>

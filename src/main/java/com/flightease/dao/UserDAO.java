@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class UserDAO {
 
-    // 1. Method untuk Cek Login
+    //Method untuk Cek Login
     public User cekLogin(String username, String password) {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
@@ -29,7 +29,6 @@ public class UserDAO {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setRole(rs.getString("role"));
-                // fullname tidak diambil dulu biar aman
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,7 +36,7 @@ public class UserDAO {
         return user;
     }
 
-    // 2. Method untuk Register User Baru
+    // Method untuk Register User Baru
     public boolean registerUser(User user) {
         boolean isSuccess = false;
         String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, 'user')";
@@ -57,7 +56,7 @@ public class UserDAO {
         return isSuccess;
     }
 
-    // 3. Method Ambil SEMUA User (INI YANG TADI HILANG)
+    // Method Ambil SEMUA User
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM users ORDER BY id ASC";
@@ -69,9 +68,6 @@ public class UserDAO {
                 u.setId(rs.getInt("id"));
                 u.setUsername(rs.getString("username"));
                 u.setRole(rs.getString("role"));
-
-                // KITA KOMEN DULU BAGIAN INI AGAR TIDAK ERROR 500
-                // u.setFullname(rs.getString("fullname")); 
                 list.add(u);
             }
         } catch (Exception e) {

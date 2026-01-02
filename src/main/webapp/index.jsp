@@ -13,7 +13,7 @@
 <%@page import="java.util.List"%>
 
 <%
-    // 1. Cek Session Login
+    
     User user = (User) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
@@ -62,7 +62,7 @@
                     <%
                         String hal = request.getParameter("halaman");
 
-                        // --- 1. HALAMAN HOME (Default) ---
+                        // HALAMAN HOME 
                         if (hal == null || hal.equals("home")) {
                             // CEK ROLE: Jika Admin tampilkan Dashboard, Jika User tampilkan Pencarian
                             if (user.getRole().equals("admin")) {
@@ -74,7 +74,7 @@
                     <jsp:include page="home.jsp" />
                     <%
                     }
-                        // --- 2. PENCARIAN TIKET ---
+                        // PENCARIAN TIKET
                     } else if (hal.equals("cari_hasil")) {
                         String asal = request.getParameter("origin_id");
                         String tujuan = request.getParameter("destination_id");
@@ -95,7 +95,7 @@
                     <jsp:include page="hasil_pencarian.jsp" />
 
                     <%
-                        // --- 3. FORMULIR BOOKING ---
+                        // FORMULIR BOOKING
                     } else if (hal.equals("booking_form")) {
                         String idStr = request.getParameter("flight_id");
                         if (idStr != null) {
@@ -111,7 +111,7 @@
                     <jsp:include page="booking.jsp" />
 
                     <%
-                        // --- 4. RIWAYAT PESANAN ---
+                        // RIWAYAT PESANAN
                     } else if (hal.equals("riwayat")) {
                         if (request.getParameter("status") != null && request.getParameter("status").equals("sukses")) {
                             out.println("<div class='alert alert-success fw-bold'><i class='bi bi-check-circle'></i> Pemesanan Berhasil! Tiket Anda telah diterbitkan.</div>");
@@ -124,7 +124,7 @@
                     <jsp:include page="riwayat.jsp" />
 
                     <%
-                        // --- 5. E-TIKET (BOARDING PASS) ---
+                        // E-TIKET (BOARDING PASS)
                     } else if (hal.equals("ticket")) {
                         String idStr = request.getParameter("id");
                         if (idStr != null) {
@@ -141,8 +141,8 @@
                     <jsp:include page="ticket.jsp" />
 
                     <%
-                        // --- 6. HALAMAN ADMIN (Master Data) ---
-                        // A. KELOLA USERS (SUDAH AKTIF)
+                        // HALAMAN ADMIN
+                        // KELOLA USERS
                     } else if (hal.equals("kelola_users")) {
                         if (!user.getRole().equals("admin")) {
                             out.println("<div class='alert alert-danger'>Akses Ditolak!</div>");
@@ -152,7 +152,7 @@
                     <%
                         }
 
-                        // B. KELOLA AIRPORTS (SUDAH AKTIF)
+                        // KELOLA AIRPORTS
                     } else if (hal.equals("kelola_airports")) {
                         if (!user.getRole().equals("admin")) {
                             out.println("<div class='alert alert-danger'>Akses Ditolak!</div>");
@@ -162,7 +162,7 @@
                     <%
                         }
 
-                        // C. KELOLA FLIGHTS (SUDAH AKTIF)
+                        // KELOLA FLIGHTS
                     } else if (hal.equals("kelola_flights")) {
                         if (!user.getRole().equals("admin")) {
                             out.println("<div class='alert alert-danger'>Akses Ditolak!</div>");
@@ -172,7 +172,7 @@
                     <%
                         }
 
-                        // D. LAPORAN BOOKINGS (SUDAH AKTIF)
+                        // LAPORAN BOOKINGS
                     } else if (hal.equals("laporan_bookings")) {
                         if (!user.getRole().equals("admin")) {
                             out.println("<div class='alert alert-danger'>Akses Ditolak!</div>");
@@ -182,7 +182,6 @@
                     <%
                             }
 
-                            // --- 7. HALAMAN TIDAK DITEMUKAN (404) ---
                         } else {
                             out.println("<div class='alert alert-danger'>Halaman tidak ditemukan!</div>");
                         }

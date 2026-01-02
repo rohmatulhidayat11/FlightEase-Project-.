@@ -13,10 +13,9 @@ public class KoneksiDB {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            // Sesuaikan nama database, user, dan password
             String url = "jdbc:postgresql://localhost:5432/db_flightease";
             String user = "postgres";
-            String pass = "123"; // GANTI DENGAN PASSWORD ASLI
+            String pass = "123"; 
 
             conn = DriverManager.getConnection(url, user, pass);
         } catch (Exception e) {
@@ -24,8 +23,6 @@ public class KoneksiDB {
         }
         return conn;
     }
-
-    // Main method untuk tes koneksi (Klik Kanan -> Run File)
     public static void main(String[] args) {
         if (getConnection() != null) {
             System.out.println("Koneksi Berhasil!");

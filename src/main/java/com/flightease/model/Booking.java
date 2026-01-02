@@ -11,8 +11,8 @@ public class Booking {
     private int id;
     private Timestamp bookingDate;
     private double totalPrice;
-    private String passengerName; // Nama penumpang
-    private Flight flight;        // Detail penerbangan (disimpan dalam objek Flight)
+    private String passengerName; 
+    private Flight flight;       
 
     public Booking() {
     }

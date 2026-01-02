@@ -8,7 +8,7 @@
 <%@page import="com.flightease.model.Flight"%>
 <%@page import="java.util.List"%>
 <%
-    // Ambil data hasil pencarian yang dikirim dari index.jsp
+    
     List<Flight> results = (List<Flight>) request.getAttribute("daftarPenerbangan");
     SimpleDateFormat sdfJam = new SimpleDateFormat("HH:mm");
     SimpleDateFormat sdfTgl = new SimpleDateFormat("dd MMMM yyyy");

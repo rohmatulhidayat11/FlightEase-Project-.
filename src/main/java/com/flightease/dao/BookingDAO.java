@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BookingDAO {
 
-    // 1. Method Simpan Pemesanan
+    // Method Simpan Pemesanan
     public boolean simpanPemesanan(int userId, int flightId, double totalPrice, String pName, String pIdentity) {
         boolean sukses = false;
         Connection conn = null;
@@ -24,7 +24,7 @@ public class BookingDAO {
 
         try {
             conn = KoneksiDB.getConnection();
-            conn.setAutoCommit(false); // Transaksi start
+            conn.setAutoCommit(false);
 
             // Insert ke Tabel BOOKINGS
             String sqlBooking = "INSERT INTO bookings (user_id, flight_id, booking_date, total_price) VALUES (?, ?, CURRENT_TIMESTAMP, ?) RETURNING id";
@@ -88,7 +88,7 @@ public class BookingDAO {
         return sukses;
     }
 
-    // 2. Method Ambil Riwayat User
+    // Method Ambil Riwayat User
     public List<Booking> getUserHistory(int userId) {
         List<Booking> list = new ArrayList<>();
 
@@ -140,8 +140,7 @@ public class BookingDAO {
         return list;
     }
 
-    // 3. Method Ambil Detail Booking (Untuk Tiket)
-    // Method ini sekarang ada DI DALAM kurung kurawal class BookingDAO
+    // Method Ambil Detail Booking (Untuk Tiket)
     public Booking getBookingById(int bookingId) {
         Booking b = null;
         String sql = "SELECT b.id, b.booking_date, b.total_price, "
@@ -190,14 +189,8 @@ public class BookingDAO {
         }
         return b;
     }
-    // --- Tambahkan Method ini di Class BookingDAO ---
-
-    // 4. Ambil SEMUA Data Booking (Untuk Admin)
     public List<Booking> getAllBookings() {
         List<Booking> list = new ArrayList<>();
-
-        // Query mirip getUserHistory, tapi TANPA 'WHERE b.user_id = ?'
-        // Kita juga join ke tabel users agar tahu siapa yang pesan akunnya
         String sql = "SELECT b.id, b.booking_date, b.total_price, "
                 + "u.username, "
                 + // Tambah ambil username
@@ -243,4 +236,3 @@ public class BookingDAO {
         return list;
     }
 } 
-// Tutup Class BookingDAO di sini

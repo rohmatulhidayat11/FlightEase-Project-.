@@ -8,22 +8,22 @@ import java.time.Year;
 
 public class DashboardDAO {
 
-    // 1. Hitung Total User
+    // Hitung Total User
     public int getTotalUsers() {
         return getCount("SELECT COUNT(*) FROM users");
     }
 
-    // 2. Hitung Total Flights
+    // Hitung Total Flights
     public int getTotalFlights() {
         return getCount("SELECT COUNT(*) FROM flights");
     }
 
-    // 3. Hitung Total Bookings
+    // Hitung Total Bookings
     public int getTotalBookings() {
         return getCount("SELECT COUNT(*) FROM bookings");
     }
 
-    // 4. Hitung Total Pendapatan (Sum)
+    // Hitung Total Pendapatan (Sum)
     public double getTotalRevenue() {
         double total = 0;
         try (Connection conn = KoneksiDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT SUM(total_price) FROM bookings")) {
@@ -50,14 +50,12 @@ public class DashboardDAO {
     }
     public Map<Integer, Double> getMonthlyRevenue() {
         Map<Integer, Double> data = new HashMap<>();
-        // Inisialisasi semua bulan dengan 0 agar grafiknya rapi (tidak ada bulan yang bolong)
+        // Inisialisasi
         for (int i = 1; i <= 12; i++) {
             data.put(i, 0.0);
         }
 
-        int currentYear = Year.now().getValue(); // Ambil tahun saat ini
-
-        // Query PostgreSQL untuk ekstrak bulan dan jumlahkan harga
+        int currentYear = Year.now().getValue(); 
         String sql = "SELECT EXTRACT(MONTH FROM booking_date) AS bulan, SUM(total_price) AS total "
                 + "FROM bookings "
                 + "WHERE EXTRACT(YEAR FROM booking_date) = ? "
@@ -69,7 +67,6 @@ public class DashboardDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                // Masukkan data dari database ke Map (menimpa nilai 0 tadi)
                 data.put(rs.getInt("bulan"), rs.getDouble("total"));
             }
         } catch (Exception e) {

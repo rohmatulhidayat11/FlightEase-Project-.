@@ -4,21 +4,20 @@
  */
 package com.flightease.model;
 
-import java.sql.Timestamp; // Untuk menangani tanggal & waktu
+import java.sql.Timestamp;
 
 public class Flight {
 
     private int id;
     private String flightNumber;
-    private Airport origin;      // Object Airport (agar bisa ambil nama kota)
-    private Airport destination; // Object Airport
+    private Airport origin;    
+    private Airport destination;
     private Timestamp departureTime;
     private double price;
 
     public Flight() {
     }
 
-    // Getter & Setter
     public int getId() {
         return id;
     }
@@ -67,7 +66,6 @@ public class Flight {
         this.price = price;
     }
 
-    // Helper untuk format harga jadi Rupiah (Opsional tapi berguna)
     public String getFormattedPrice() {
         return String.format("Rp %,.0f", price);
     }

@@ -23,7 +23,7 @@ public class AirportServlet extends HttpServlet {
         AirportDAO dao = new AirportDAO();
 
         if (action != null && action.equals("add")) {
-            // --- LOGIKA TAMBAH DATA ---
+            // LOGIKA TAMBAH DATA
             String code = request.getParameter("code");
             String name = request.getParameter("name");
             String city = request.getParameter("city");
@@ -36,16 +36,12 @@ public class AirportServlet extends HttpServlet {
             dao.addAirport(a);
 
         } else if (action != null && action.equals("delete")) {
-            // --- LOGIKA HAPUS DATA ---
+            // LOGIKA HAPUS DATA
             int id = Integer.parseInt(request.getParameter("id"));
             dao.deleteAirport(id);
         }
-
-        // Balik lagi ke halaman Admin Airports
         response.sendRedirect("index.jsp?halaman=kelola_airports");
     }
-
-    // Agar bisa delete lewat link (GET), kita panggil doPost juga
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);

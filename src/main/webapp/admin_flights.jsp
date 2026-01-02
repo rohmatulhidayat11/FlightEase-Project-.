@@ -6,7 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%
     FlightDAO fDao = new FlightDAO();
-    List<Flight> flights = fDao.getAllFlights(); // Ini memanggil method yang baru kita tambah
+    List<Flight> flights = fDao.getAllFlights(); 
 
     AirportDAO aDao = new AirportDAO();
     List<Airport> airports = aDao.getAllAirports();

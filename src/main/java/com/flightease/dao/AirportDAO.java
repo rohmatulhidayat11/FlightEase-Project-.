@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AirportDAO {
 
-    // 1. Ambil Semua Data Bandara
+    // Ambil Semua Data Bandara
     public List<Airport> getAllAirports() {
         List<Airport> list = new ArrayList<>();
         String sql = "SELECT * FROM airports ORDER BY city ASC";
@@ -31,9 +31,9 @@ public class AirportDAO {
             e.printStackTrace();
         }
         return list;
-    } // <--- JANGAN LUPA TUTUP KURUNG KURAWAL METHOD INI
+    }
 
-    // 2. Tambah Bandara Baru
+    // Tambah Bandara Baru
     public boolean addAirport(Airport a) {
         String sql = "INSERT INTO airports (code, name, city) VALUES (?, ?, ?)";
         try (Connection conn = KoneksiDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -47,7 +47,7 @@ public class AirportDAO {
         }
     }
 
-    // 3. Hapus Bandara
+    // Hapus Bandara
     public boolean deleteAirport(int id) {
         String sql = "DELETE FROM airports WHERE id = ?";
         try (Connection conn = KoneksiDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {

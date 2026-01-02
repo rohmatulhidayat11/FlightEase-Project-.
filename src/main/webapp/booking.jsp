@@ -9,7 +9,7 @@
 <%
     Flight f = (Flight) request.getAttribute("flightDetail");
     if (f == null) {
-        response.sendRedirect("index.jsp"); // Balik kalau akses langsung tanpa pilih
+        response.sendRedirect("index.jsp"); 
         return;
     }
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, HH:mm");

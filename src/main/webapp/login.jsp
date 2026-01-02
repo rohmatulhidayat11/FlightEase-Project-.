@@ -19,7 +19,7 @@
         <style>
             body {
                 font-family: 'Poppins', sans-serif;
-                /* Background Bandara HD */
+                
                 background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');
                 background-size: cover;
                 background-position: center;
@@ -29,8 +29,6 @@
                 justify-content: center;
                 overflow: hidden;
             }
-
-            /* Overlay Hitam Transparan */
             .bg-overlay {
                 position: absolute;
                 top: 0;
@@ -41,7 +39,6 @@
                 z-index: 1;
             }
 
-            /* Kartu Glassmorphism */
             .login-card {
                 background: rgba(255, 255, 255, 0.85); /* Lebih solid sedikit biar teks jelas */
                 backdrop-filter: blur(12px);

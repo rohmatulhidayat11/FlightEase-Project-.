@@ -12,7 +12,7 @@
 <%
     User u = (User) session.getAttribute("user");
 
-    // 1. Ambil data bandara dari Database
+  
     AirportDAO airportDao = new AirportDAO();
     List<Airport> listAirports = airportDao.getAllAirports();
 %>

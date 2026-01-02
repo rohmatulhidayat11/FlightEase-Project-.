@@ -13,8 +13,6 @@ public class Airport {
 
     public Airport() {
     }
-
-    // Getter & Setter
     public int getId() {
         return id;
     }
