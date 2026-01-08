@@ -9,15 +9,13 @@
     
     // SKENARIO A: Jika User BELUM LOGIN
     if (user == null) {
-        // Tampilkan Landing Page (Halaman Depan)
-        // User tidak bisa akses halaman lain kecuali Login/Register yang file-nya terpisah
+        // Tampilkan Landing Page
 %>
         <jsp:include page="landing.jsp" />
 <%
     } 
     // SKENARIO B: Jika User SUDAH LOGIN
     else {
-        // Tampilkan Struktur Dashboard (Navbar, Sidebar, Content)
 %>
         <!DOCTYPE html>
         <html lang="id">
@@ -74,8 +72,6 @@
                 <div class="container mt-4">
                     <%
                         if (halaman == null || halaman.equals("home")) {
-                            // Halaman Home User (Pencarian Tiket)
-                            // Pastikan home.jsp sekarang isinya FORM PENCARIAN saja, bukan landing page lagi
                     %>
                         <jsp:include page="home.jsp" />
                     <%
@@ -92,6 +88,19 @@
                         <jsp:include page="riwayat.jsp" />
                     <%
                         } else if (halaman.equals("ticket")) {
+                            // LOGIKA PENGAMBILAN DATA TIKET DISINI (SUDAH DIPERBAIKI)
+                            
+                            // 1. Ambil ID dari URL (index.jsp?halaman=ticket&id=10)
+                            String idStr = request.getParameter("id");
+                            
+                            if(idStr != null) {
+                                // 2. Panggil DAO untuk cari data tiket
+                                com.flightease.dao.BookingDAO bDao = new com.flightease.dao.BookingDAO();
+                                com.flightease.model.Booking tiket = bDao.getBookingById(Integer.parseInt(idStr));
+                                
+                                // 3. Simpan ke Request Attribute supaya bisa dibaca ticket.jsp
+                                request.setAttribute("ticketDetail", tiket);
+                            }
                     %>
                         <jsp:include page="ticket.jsp" />
                     <%

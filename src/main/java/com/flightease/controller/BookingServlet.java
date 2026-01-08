@@ -15,39 +15,31 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-// PENTING: Nama dan URL Pattern harus "BookingServlet" agar terbaca oleh booking.jsp
 @WebServlet(name = "BookingServlet", urlPatterns = {"/BookingServlet"})
 public class BookingServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // 1. Cek User Login
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
-        // Jika session habis/belum login, lempar ke login
         if (user == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
         try {
-            // 2. Tangkap Data dari Form (booking.jsp)
-            // Pastikan "name" di input HTML sama dengan parameter di sini
             String flightIdStr = request.getParameter("flight_id");
-            String title = request.getParameter("title");             // Tuan/Nyonya
-            String passengerName = request.getParameter("passenger_name"); // Nama Penumpang
+            String title = request.getParameter("title");
+            String passengerName = request.getParameter("passenger_name");
 
-            // Validasi sederhana
             if (flightIdStr == null || passengerName == null) {
                 response.sendRedirect("index.jsp");
                 return;
             }
 
             int flightId = Integer.parseInt(flightIdStr);
-
-            // 3. Ambil Data Penerbangan (Untuk dapat harganya)
             FlightDAO fDao = new FlightDAO();
             Flight flight = fDao.getFlightById(flightId);
             
@@ -56,30 +48,26 @@ public class BookingServlet extends HttpServlet {
                 return;
             }
 
-            // 4. Siapkan Objek BOOKING (Tabel bookings)
+            // Set Data Booking
             Booking booking = new Booking();
-            booking.setUserId(user.getId());                // ID User yang sedang login
-            booking.setFlightId(flightId);                  // ID Penerbangan
-            booking.setTotalPrice(flight.getPrice());       // Harga Tiket
-            booking.setBookingDate(new Timestamp(System.currentTimeMillis())); // Waktu Sekarang
-            booking.setStatus("confirmed");                 // Status langsung OK
+            booking.setUserId(user.getId());
+            booking.setFlightId(flightId);
+            booking.setTotalPrice(flight.getPrice());
+            booking.setBookingDate(new Timestamp(System.currentTimeMillis()));
+            booking.setStatus("confirmed");
 
-            // 5. Siapkan Objek PASSENGER (Tabel passengers)
+            // Set Data Penumpang
             Passenger passenger = new Passenger();
             passenger.setName(passengerName);
             passenger.setTitle(title);
 
-            // 6. Simpan ke Database menggunakan BookingDAO yang baru
+            // Simpan
             BookingDAO bookingDao = new BookingDAO();
-            // Method ini menyimpan ke tabel bookings DAN passengers sekaligus
             boolean sukses = bookingDao.createBooking(booking, passenger); 
 
-            // 7. Redirect sesuai hasil
             if (sukses) {
-                // Berhasil -> Ke Halaman Riwayat
                 response.sendRedirect("index.jsp?halaman=riwayat&status=sukses");
             } else {
-                // Gagal -> Balik ke Home dengan pesan error
                 response.sendRedirect("index.jsp?halaman=home&status=gagal_booking");
             }
 

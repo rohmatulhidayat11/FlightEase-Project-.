@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.flightease.controller;
 
 import com.flightease.dao.AirportDAO;
@@ -15,35 +11,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "AirportServlet", urlPatterns = {"/AirportServlet"})
 public class AirportServlet extends HttpServlet {
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         AirportDAO dao = new AirportDAO();
 
-        if (action != null && action.equals("add")) {
-            // LOGIKA TAMBAH DATA
-            String code = request.getParameter("code");
-            String name = request.getParameter("name");
-            String city = request.getParameter("city");
-
+        if ("add".equals(action)) {
             Airport a = new Airport();
-            a.setCode(code);
-            a.setName(name);
-            a.setCity(city);
-
+            a.setCode(request.getParameter("code"));
+            a.setName(request.getParameter("name"));
+            a.setCity(request.getParameter("city"));
             dao.addAirport(a);
-
-        } else if (action != null && action.equals("delete")) {
-            // LOGIKA HAPUS DATA
+        } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             dao.deleteAirport(id);
         }
         response.sendRedirect("index.jsp?halaman=kelola_airports");
-    }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
     }
 }

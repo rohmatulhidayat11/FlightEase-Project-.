@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.flightease.controller;
 
 import com.flightease.dao.UserDAO;
@@ -15,28 +11,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        // Tangkap inputan dari form
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String u = request.getParameter("username");
         String p = request.getParameter("password");
 
-        // Masukkan ke object User
         User newUser = new User();
         newUser.setUsername(u);
         newUser.setPassword(p);
-        // Panggil DAO
-        UserDAO dao = new UserDAO();
-        boolean sukses = dao.registerUser(newUser);
 
-        // Redirect sesuai hasil
-        if (sukses) {
-            // Jika sukses, lempar ke Login dengan pesan sukses
+        UserDAO dao = new UserDAO();
+        if (dao.registerUser(newUser)) {
             response.sendRedirect("login.jsp?status=registered");
         } else {
-            // Jika gagal, balikin ke register
             response.sendRedirect("register.jsp?status=gagal");
         }
     }
