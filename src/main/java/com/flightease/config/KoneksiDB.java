@@ -13,9 +13,9 @@ public class KoneksiDB {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/db_flightease";
+            String url = "jdbc:postgresql://localhost:5432/zai";
             String user = "postgres";
-            String pass = "123"; 
+            String pass = "zai"; 
 
             conn = DriverManager.getConnection(url, user, pass);
         } catch (Exception e) {
