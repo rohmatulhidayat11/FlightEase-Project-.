@@ -58,5 +58,27 @@ public class AirportDAO {
             return false;
         }
     }
-
+// Method untuk Mengambil Data Bandara Berdasarkan ID
+    public Airport getAirportById(int id) {
+        Airport a = null;
+        String sql = "SELECT * FROM airports WHERE id = ?";
+        
+        try (Connection conn = KoneksiDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+             
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                a = new Airport();
+                a.setId(rs.getInt("id"));
+                a.setCode(rs.getString("code"));
+                a.setCity(rs.getString("city"));
+                a.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
+    }
 }

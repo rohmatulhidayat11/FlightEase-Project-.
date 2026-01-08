@@ -1,64 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.flightease.model;
-
 import java.sql.Timestamp;
 
 public class Booking {
-
     private int id;
+    private int userId;
+    private int flightId;
     private Timestamp bookingDate;
     private double totalPrice;
-    private String passengerName; 
-    private Flight flight;       
+    private String status;
+    
+    // Tambahan untuk join tabel (biar enak nampilin di riwayat)
+    private Flight flight; 
 
-    public Booking() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Timestamp getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(Timestamp bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getPassengerName() {
-        return passengerName;
-    }
-
-    public void setPassengerName(String passengerName) {
-        this.passengerName = passengerName;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    // Helper format harga
-    public String getFormattedPrice() {
-        return String.format("Rp %,.0f", totalPrice);
-    }
+    // Getter Setter Standar
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
+    public int getFlightId() { return flightId; }
+    public void setFlightId(int flightId) { this.flightId = flightId; }
+    public Timestamp getBookingDate() { return bookingDate; }
+    public void setBookingDate(Timestamp bookingDate) { this.bookingDate = bookingDate; }
+    public double getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    
+    public Flight getFlight() { return flight; }
+    public void setFlight(Flight flight) { this.flight = flight; }
 }

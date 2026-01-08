@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-   version="6.0">
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -12,11 +13,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.flightease.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>com.flightease.controller.BookingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.flightease.controller.RegisterServlet</servlet-class>
@@ -25,7 +29,6 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.flightease.controller.LogoutServlet</servlet-class>
@@ -34,7 +37,6 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>FlightServlet</servlet-name>
         <servlet-class>com.flightease.controller.FlightServlet</servlet-class>
@@ -42,14 +44,5 @@
     <servlet-mapping>
         <servlet-name>FlightServlet</servlet-name>
         <url-pattern>/FlightServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>BookingServlet</servlet-name>
-        <servlet-class>com.flightease.controller.BookingServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>BookingServlet</servlet-name>
-        <url-pattern>/BookingServlet</url-pattern>
     </servlet-mapping>
 </web-app>
