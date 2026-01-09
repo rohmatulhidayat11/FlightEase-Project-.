@@ -61,7 +61,12 @@
                             <jsp:include page="admin_bookings.jsp" />
                         <%
                             }
+                            else if (halaman.equals("database_schema")) {
                         %>
+                            <jsp:include page="admin_database.jsp" /> <%
+                                }
+                        %>
+                        
                     </div>
                 </div>
 

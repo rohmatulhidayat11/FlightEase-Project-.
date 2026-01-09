@@ -13,7 +13,33 @@
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 %>
-
+<%
+    String status = request.getParameter("status");
+    if(status != null) {
+        if(status.equals("sukses_tambah")) {
+%>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-2"></i>Jadwal Penerbangan berhasil disimpan.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<%      } else if(status.equals("sukses_hapus")) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-trash me-2"></i>Jadwal berhasil dihapus.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<%      } else if(status.equals("gagal_hapus_fk")) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Gagal Menghapus!</strong> Penerbangan ini sudah memiliki Booking (Penumpang). Data tidak bisa dihapus demi keamanan transaksi.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<%      } else { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-x-circle me-2"></i>Terjadi kesalahan sistem.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<%      }
+    }
+%>
 <div class="row">
     <div class="col-md-4">
         <div class="card shadow border-0 mb-3">

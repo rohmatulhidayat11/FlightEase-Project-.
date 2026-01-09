@@ -45,6 +45,9 @@
         <a href="index.jsp?halaman=laporan_bookings" class="list-group-item list-group-item-action py-2">
             <i class="bi bi-receipt text-success me-2"></i> Bookings
         </a>
+        <a href="index.jsp?halaman=database_schema" class="list-group-item list-group-item-action py-2">
+            <i class="bi bi-database-fill text-primary me-2"></i> Struktur Database
+        </a>
         <% } %>
 
         <% if (userRole.equals("user")) { %>

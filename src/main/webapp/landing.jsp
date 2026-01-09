@@ -182,7 +182,7 @@
                 
                 <div class="col-6 col-md-4 col-lg-2">
                     <div class="team-card">
-                        <img src="https://ui-avatars.com/api/?name=Ketua+Tim&background=0d6efd&color=fff" class="team-img" alt="Member 1">
+                        <img src="images/hakim.jpeg" class="team-img" alt="Member 1">
                         <h6 class="fw-bold mb-1">Abdul Hakim</h6>
                         <small class="text-muted d-block mb-2">NIM: 0110224161</small>
                         <span class="badge bg-primary bg-opacity-10 text-primary">Project Manager</span>
@@ -200,7 +200,7 @@
 
                 <div class="col-6 col-md-4 col-lg-2">
                     <div class="team-card">
-                        <img src="images/rohmat.jpeg" class="team-img" alt="Member 3">
+                        <img src="images/rohmatt.jpeg" class="team-img" alt="Member 3">
                         <h6 class="fw-bold mb-1">Rohmatul Hidayat</h6>
                         <small class="text-muted d-block mb-2">NIM: 0110224015</small>
                         <span class="badge bg-warning bg-opacity-10 text-warning">Frontend Dev</span>
