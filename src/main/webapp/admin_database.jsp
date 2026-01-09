@@ -2,21 +2,55 @@
 
 <style>
     /* Style untuk Skema Database */
-    .db-card { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.2s; overflow: hidden; }
-    .db-card:hover { transform: translateY(-5px); }
+    .db-card { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.2s; overflow: hidden; background: white; }
+    .db-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    
     .db-header { background: #1e293b; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Consolas', monospace; font-weight: bold; }
     .db-header i { color: #60a5fa; }
+    
     .db-row { display: flex; justify-content: space-between; padding: 10px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
     .db-row:last-child { border-bottom: none; }
+    
     .col-pk { background: #ffc107; color: #000; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-right: 8px; }
     .col-fk { background: #0dcaf0; color: #000; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-right: 8px; }
+    
     .col-name { font-weight: 600; color: #334155; }
     .col-type { color: #64748b; font-family: 'Consolas', monospace; font-size: 0.85rem; }
+    
+    /* Style Khusus Gambar ERD */
+    .erd-container {
+        background: white;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+        text-align: center;
+    }
+    .erd-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
 </style>
 
 <div class="mb-4 fade-in">
     <h3 class="fw-bold text-dark"><i class="bi bi-database-fill-gear text-primary me-2"></i>Struktur Basis Data</h3>
-    <p class="text-muted">Dokumentasi teknis skema database PostgreSQL yang digunakan dalam sistem.</p>
+    <p class="text-muted">Dokumentasi teknis skema database PostgreSQL yang digunakan dalam sistem FlightEase.</p>
+</div>
+
+<div class="row mb-5 fade-in">
+    <div class="col-12">
+        <h5 class="text-secondary fw-bold text-uppercase mb-3 ps-2 border-start border-4 border-warning">Entity Relationship Diagram (ERD)</h5>
+        <div class="erd-container">
+            <img src="images/ERD DATABASES.png.jpeg" 
+                 class="erd-image" alt="Skema Database ERD">
+            
+            <div class="mt-3 text-muted small">
+                <i class="bi bi-info-circle me-1"></i> Diagram ini menggambarkan relasi antar tabel Users, Flights, Bookings, dan Airports.
+            </div>
+        </div>
+    </div>
 </div>
 
 <h5 class="text-secondary fw-bold text-uppercase mb-3 ps-2 border-start border-4 border-primary">Master Data Tables</h5>
