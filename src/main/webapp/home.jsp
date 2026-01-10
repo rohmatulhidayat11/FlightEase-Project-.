@@ -3,7 +3,7 @@
 <%@page import="com.flightease.model.Airport"%>
 <%@page import="java.util.List"%>
 <%
-    // Ambil data user untuk menyapa
+    
     User userHome = (User) session.getAttribute("user");
     String namaUser = (userHome != null) ? userHome.getUsername() : "Traveler";
 
@@ -17,7 +17,7 @@
         color: white;
         padding: 40px 30px;
         border-radius: 20px;
-        margin-bottom: -30px; /* Biar form naik ke atas */
+        margin-bottom: -30px; 
         padding-bottom: 60px;
     }
     .search-panel {

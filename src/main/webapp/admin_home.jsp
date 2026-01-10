@@ -4,7 +4,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.time.Year"%>
 <%
-    // 1. SIAPKAN DATA DARI DATABASE
+    
     DashboardDAO dao = new DashboardDAO();
     int totalUsers = dao.getTotalUsers();
     int totalFlights = dao.getTotalFlights();
@@ -207,35 +207,35 @@
 
     const ctx = document.getElementById('revenueChart').getContext('2d');
     
-    // Gradient Warna Biru yang Elegan
+    
     let gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, 'rgba(13, 110, 253, 0.5)'); // Biru Transparan Atas
     gradient.addColorStop(1, 'rgba(13, 110, 253, 0.0)'); // Putih/Bening Bawah
 
     new Chart(ctx, {
-        type: 'line', // Ganti ke Line Chart (Area)
+        type: 'line', 
         data: {
             labels: labels,
             datasets: [{
                 label: 'Pendapatan (Rp)',
                 data: dataPendapatan,
                 backgroundColor: gradient,
-                borderColor: '#0d6efd', // Warna Garis Biru Bootstrap
+                borderColor: '#0d6efd', 
                 borderWidth: 3,
                 pointBackgroundColor: '#fff',
                 pointBorderColor: '#0d6efd',
                 pointBorderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 7,
-                fill: true, // Mengisi area di bawah garis
-                tension: 0.4 // Membuat garis melengkung (Smooth Curve)
+                fill: true, 
+                tension: 0.4 
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }, // Sembunyikan label default
+                legend: { display: false }, 
                 tooltip: {
                     backgroundColor: '#1e293b',
                     titleFont: { family: 'Poppins', size: 13 },
@@ -256,11 +256,11 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { borderDash: [5, 5], color: '#f1f5f9' }, // Garis grid putus-putus halus
+                    grid: { borderDash: [5, 5], color: '#f1f5f9' }, 
                     ticks: {
                         font: { family: 'Poppins', size: 11 },
                         callback: function(value) {
-                            return (value / 1000000) + ' Jt'; // Singkat angka jadi Juta
+                            return (value / 1000000) + ' Jt'; 
                         }
                     }
                 },

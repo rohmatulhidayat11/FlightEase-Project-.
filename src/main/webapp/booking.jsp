@@ -6,29 +6,29 @@
 <%@page import="java.text.SimpleDateFormat"%>
 
 <%
-    // 1. Ambil ID Penerbangan dari URL
+    
     String idStr = request.getParameter("flight_id");
     Flight flight = null;
     
-    // 2. Ambil Detail Penerbangan dari Database
+    
     if(idStr != null) {
         FlightDAO fDao = new FlightDAO();
         flight = fDao.getFlightById(Integer.parseInt(idStr));
     }
 
-    // Jika penerbangan tidak ditemukan, kembalikan ke home
+    
     if(flight == null) {
         response.sendRedirect("index.jsp");
         return;
     }
 
-    // Format Rupiah & Tanggal
+   
     Locale indonesia = new Locale("id", "ID");
     NumberFormat formater = NumberFormat.getCurrencyInstance(indonesia);
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd MMMM yyyy", indonesia);
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm", indonesia);
     
-    // Ambil User Login (Untuk isi otomatis nama pemesan)
+    
     User userBooking = (User) session.getAttribute("user");
 %>
 

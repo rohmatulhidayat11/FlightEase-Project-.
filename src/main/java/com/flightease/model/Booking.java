@@ -38,7 +38,7 @@ public class Booking {
     public Passenger getPassenger() { return passenger; }
     public void setPassenger(Passenger passenger) { this.passenger = passenger; }
 
-    // Helper untuk JSP admin_bookings.jsp
+    
     public String getPassengerName() {
         return (passenger != null) ? passenger.getName() : "Unknown";
     }

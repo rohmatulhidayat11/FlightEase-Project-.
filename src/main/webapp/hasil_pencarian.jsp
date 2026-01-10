@@ -8,15 +8,15 @@
 <%@page import="java.text.SimpleDateFormat"%>
 
 <%
-    // 1. Ambil Data dari URL
+    
     String originStr = request.getParameter("origin_id");
     String destStr = request.getParameter("destination_id");
-    String tanggalStr = request.getParameter("tanggal"); // Format: 2026-01-01
+    String tanggalStr = request.getParameter("tanggal"); 
 
     List<Flight> flightList = null;
     String ruteInfo = "";
 
-    // 2. Panggil DAO jika data lengkap
+    
     if (originStr != null && destStr != null && tanggalStr != null) {
         int originId = Integer.parseInt(originStr);
         int destId = Integer.parseInt(destStr);
@@ -24,7 +24,7 @@
         FlightDAO fDao = new FlightDAO();
         flightList = fDao.searchFlights(originId, destId, tanggalStr);
         
-        // Ambil nama kota buat judul (Opsional, biar cantik)
+        
         AirportDAO aDao = new AirportDAO();
         Airport as = aDao.getAirportById(originId);
         Airport tuj = aDao.getAirportById(destId);
@@ -33,7 +33,7 @@
         }
     }
 
-    // Format Rupiah & Tanggal
+    
     Locale indonesia = new Locale("id", "ID");
     NumberFormat formater = NumberFormat.getCurrencyInstance(indonesia);
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, HH:mm", indonesia);

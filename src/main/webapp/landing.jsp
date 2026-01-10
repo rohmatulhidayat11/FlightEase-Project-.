@@ -13,11 +13,11 @@
     <style>
         body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
         
-        /* NAVBAR TRANSPARAN */
+        
         .navbar { transition: 0.3s; padding: 20px 0; }
         .navbar-brand { font-weight: 700; font-size: 1.5rem; }
         
-        /* HERO SECTION */
+        
         .hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074');
             background-size: cover;
@@ -48,7 +48,7 @@
             background: #0b5ed7; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.4);
         }
         
-        /* FEATURES SECTION */
+        
         .feature-box {
             padding: 40px;
             border-radius: 20px;
@@ -66,7 +66,7 @@
             font-size: 2rem; margin-bottom: 20px;
         }
 
-        /* ABOUT US & TEAM SECTION */
+       
         .team-card {
             background: white;
             padding: 30px 20px;

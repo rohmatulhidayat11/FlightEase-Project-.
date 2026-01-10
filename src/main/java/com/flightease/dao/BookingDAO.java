@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BookingDAO {
 
-    // Helper untuk mapping ResultSet ke Object Booking (biar tidak coding ulang terus)
+    
     private Booking mapRowToBooking(ResultSet rs) throws SQLException {
         Booking b = new Booking();
         b.setId(rs.getInt("id"));
@@ -49,20 +49,20 @@ public class BookingDAO {
                 b.setPassenger(p);
             }
         } catch (SQLException e) {
-            // Kolom tidak ditemukan, abaikan (misal saat query tidak join passenger)
+            
         }
 
         return b;
     }
 
-    // 1. CREATE BOOKING (Transaksi)
+    
     public boolean createBooking(Booking b, Passenger p) {
         Connection conn = null;
         PreparedStatement ps1 = null, ps2 = null;
         ResultSet rs = null;
         try {
             conn = KoneksiDB.getConnection();
-            conn.setAutoCommit(false); // Mulai Transaksi
+            conn.setAutoCommit(false); 
 
             // Insert Booking
             String sql1 = "INSERT INTO bookings (user_id, flight_id, booking_date, total_price, status) VALUES (?, ?, ?, ?, ?)";
@@ -98,10 +98,10 @@ public class BookingDAO {
         }
     }
 
-    // 2. GET ALL BOOKINGS (Untuk Admin - admin_bookings.jsp)
+    
     public List<Booking> getAllBookings() {
         List<Booking> list = new ArrayList<>();
-        // Query Join Lengkap (Bookings + Flights + Airports + Passengers)
+        
         String sql = "SELECT b.*, "
                    + "f.flight_number, f.departure_time, "
                    + "ao.code AS origin_code, ao.city AS origin_city, "
@@ -124,7 +124,7 @@ public class BookingDAO {
         return list;
     }
 
-    // 3. GET BOOKINGS BY USER (Untuk Riwayat - riwayat.jsp)
+    
     public List<Booking> getBookingsByUserId(int userId) {
         List<Booking> list = new ArrayList<>();
         String sql = "SELECT b.*, "
@@ -149,7 +149,7 @@ public class BookingDAO {
         return list;
     }
 
-    // 4. GET BOOKING BY ID (Untuk Tiket - ticket.jsp)
+    
     public Booking getBookingById(int id) {
         Booking b = null;
         String sql = "SELECT b.*, "

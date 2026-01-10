@@ -33,8 +33,7 @@ public class AirportDAO {
             return ps.executeUpdate() > 0;
         } catch (Exception e) { e.printStackTrace(); return false; }
     }
-    // Method Tambahan: Ambil Data Bandara Berdasarkan ID
-    // Method ini DIPERLUKAN oleh hasil_pencarian.jsp
+    
     public Airport getAirportById(int id) {
         Airport a = null;
         String sql = "SELECT * FROM airports WHERE id = ?";
