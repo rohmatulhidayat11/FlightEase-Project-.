@@ -191,9 +191,9 @@
 
                 <div class="col-6 col-md-4 col-lg-2">
                     <div class="team-card">
-                        <img src="https://ui-avatars.com/api/?name=Anggota+2&background=0dcaf0&color=fff" class="team-img" alt="Member 2">
+                        <img src="images/lestari.jpeg" class="team-img" alt="Member 2">
                         <h6 class="fw-bold mb-1">Lestari</h6>
-                        <small class="text-muted d-block mb-2">NIM: 011022xxxx</small>
+                        <small class="text-muted d-block mb-2">NIM: 0110224201</small>
                         <span class="badge bg-info bg-opacity-10 text-info">dev</span>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                         <img src="images/zaidaan.jpeg" class="team-img" alt="Member 5">
                         <h6 class="fw-bold mb-1">Zaidaan Salman</h6>
                         <small class="text-muted d-block mb-2">NIM: 0110224078</small>
-                        <span class="badge bg-success bg-opacity-10 text-success">Adalah Pokoknya</span>
+                        <span class="badge bg-success bg-opacity-10 text-success">UI/UX</span>
                     </div>
                 </div>
 
