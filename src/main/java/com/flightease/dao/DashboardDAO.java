@@ -33,7 +33,7 @@ public class DashboardDAO {
         for (int i = 1; i <= 12; i++) data.put(i, 0.0); // Inisialisasi 0
 
         int currentYear = Year.now().getValue();
-        // Syntax PostgreSQL untuk extract bulan
+        
         String sql = "SELECT EXTRACT(MONTH FROM booking_date) AS bulan, SUM(total_price) AS total "
                    + "FROM bookings WHERE EXTRACT(YEAR FROM booking_date) = ? GROUP BY bulan";
 

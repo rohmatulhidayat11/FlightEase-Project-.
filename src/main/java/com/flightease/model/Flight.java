@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 public class Flight {
     private int id;
     private String flightNumber;
-    private Airport origin;      // Relasi ke object Airport
-    private Airport destination; // Relasi ke object Airport
+    private Airport origin;      
+    private Airport destination; 
     private Timestamp departureTime;
     private double price;
 
@@ -26,7 +26,7 @@ public class Flight {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
     
-    // Helper untuk format harga di JSP
+    
     public String getFormattedPrice() {
         return String.format("Rp %,.0f", price);
     }

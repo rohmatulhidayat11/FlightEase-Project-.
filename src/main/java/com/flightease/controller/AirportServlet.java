@@ -33,7 +33,7 @@ public class AirportServlet extends HttpServlet {
                 }
 
             } else if ("delete".equals(action)) {
-                // LOGIKA HAPUS (DIPERBAIKI)
+                
                 try {
                     int id = Integer.parseInt(request.getParameter("id"));
                     boolean sukses = dao.deleteAirport(id);
@@ -41,7 +41,7 @@ public class AirportServlet extends HttpServlet {
                     if (sukses) {
                         response.sendRedirect("index.jsp?halaman=kelola_airports&status=sukses_hapus");
                     } else {
-                        // Gagal biasanya karena Foreign Key (Data sedang dipakai)
+                        
                         response.sendRedirect("index.jsp?halaman=kelola_airports&status=gagal_hapus_fk");
                     }
                 } catch (NumberFormatException e) {

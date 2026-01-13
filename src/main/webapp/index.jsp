@@ -1,20 +1,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.flightease.model.User"%>
 <%
-    // 1. CEK SESSION USER
+    
     User user = (User) session.getAttribute("user");
     String halaman = request.getParameter("halaman");
 
-    // 2. LOGIKA ROUTING UTAMA
     
-    // SKENARIO A: Jika User BELUM LOGIN
+    
+    
     if (user == null) {
         // Tampilkan Landing Page
 %>
         <jsp:include page="landing.jsp" />
 <%
     } 
-    // SKENARIO B: Jika User SUDAH LOGIN
+    
     else {
 %>
         <!DOCTYPE html>
@@ -98,17 +98,17 @@
                         <jsp:include page="riwayat.jsp" />
                     <%
                         } else if (halaman.equals("ticket")) {
-                            // LOGIKA PENGAMBILAN DATA TIKET DISINI (SUDAH DIPERBAIKI)
                             
-                            // 1. Ambil ID dari URL (index.jsp?halaman=ticket&id=10)
+                            
+                            
                             String idStr = request.getParameter("id");
                             
                             if(idStr != null) {
-                                // 2. Panggil DAO untuk cari data tiket
+                                
                                 com.flightease.dao.BookingDAO bDao = new com.flightease.dao.BookingDAO();
                                 com.flightease.model.Booking tiket = bDao.getBookingById(Integer.parseInt(idStr));
                                 
-                                // 3. Simpan ke Request Attribute supaya bisa dibaca ticket.jsp
+                               
                                 request.setAttribute("ticketDetail", tiket);
                             }
                     %>

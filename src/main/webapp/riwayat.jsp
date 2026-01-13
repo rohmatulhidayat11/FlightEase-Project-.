@@ -9,7 +9,7 @@
 <%
     // Cek Login
     User userRiwayat = (User) session.getAttribute("user");
-    if(userRiwayat == null) return; // Stop jika belum login
+    if(userRiwayat == null) return; 
 
     // Ambil Data Riwayat dari Database
     BookingDAO bDao = new BookingDAO();

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FlightDAO {
 
-    // Helper untuk mapping ResultSet ke Object Flight
+    
     private Flight mapResultSetToFlight(ResultSet rs) throws SQLException {
         Flight f = new Flight();
         f.setId(rs.getInt("id"));

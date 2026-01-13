@@ -13,11 +13,11 @@
     <style>
         body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
         
-        /* NAVBAR TRANSPARAN */
+        
         .navbar { transition: 0.3s; padding: 20px 0; }
         .navbar-brand { font-weight: 700; font-size: 1.5rem; }
         
-        /* HERO SECTION */
+        
         .hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074');
             background-size: cover;
@@ -48,7 +48,7 @@
             background: #0b5ed7; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.4);
         }
         
-        /* FEATURES SECTION */
+        
         .feature-box {
             padding: 40px;
             border-radius: 20px;
@@ -66,7 +66,7 @@
             font-size: 2rem; margin-bottom: 20px;
         }
 
-        /* ABOUT US & TEAM SECTION */
+       
         .team-card {
             background: white;
             padding: 30px 20px;
@@ -191,9 +191,9 @@
 
                 <div class="col-6 col-md-4 col-lg-2">
                     <div class="team-card">
-                        <img src="https://ui-avatars.com/api/?name=Anggota+2&background=0dcaf0&color=fff" class="team-img" alt="Member 2">
+                        <img src="images/lestari.jpeg" class="team-img" alt="Member 2">
                         <h6 class="fw-bold mb-1">Lestari</h6>
-                        <small class="text-muted d-block mb-2">NIM: 011022xxxx</small>
+                        <small class="text-muted d-block mb-2">NIM: 0110224201</small>
                         <span class="badge bg-info bg-opacity-10 text-info">dev</span>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                         <img src="images/zaidaan.jpeg" class="team-img" alt="Member 5">
                         <h6 class="fw-bold mb-1">Zaidaan Salman</h6>
                         <small class="text-muted d-block mb-2">NIM: 0110224078</small>
-                        <span class="badge bg-success bg-opacity-10 text-success">Adalah Pokoknya</span>
+                        <span class="badge bg-success bg-opacity-10 text-success">UI/UX</span>
                     </div>
                 </div>
 
