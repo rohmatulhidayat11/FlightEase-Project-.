@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "FlightServlet", urlPatterns = {"/FlightServlet"})
 public class FlightServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -22,7 +23,7 @@ public class FlightServlet extends HttpServlet {
         try {
 
             /* =====================
-               CREATE (ADD)
+               CREATE
                ===================== */
             if ("add".equals(action)) {
 
@@ -32,26 +33,22 @@ public class FlightServlet extends HttpServlet {
                 double price = Double.parseDouble(request.getParameter("price"));
 
                 String dateStr = request.getParameter("departure_time");
-                if (dateStr != null && !dateStr.isEmpty()) {
-                    String cleanDate = dateStr.replace("T", " ");
-                    if (cleanDate.length() == 16) {
-                        cleanDate += ":00";
-                    }
+                String cleanDate = dateStr.replace("T", " ");
+                if (cleanDate.length() == 16) cleanDate += ":00";
 
-                    Flight f = new Flight();
-                    f.setFlightNumber(no);
-                    f.setDepartureTime(Timestamp.valueOf(cleanDate));
-                    f.setPrice(price);
+                Flight f = new Flight();
+                f.setFlightNumber(no);
+                f.setDepartureTime(Timestamp.valueOf(cleanDate));
+                f.setPrice(price);
 
-                    if (dao.addFlight(f, originId, destId)) {
-                        response.sendRedirect("index.jsp?halaman=kelola_flights&status=sukses_tambah");
-                    } else {
-                        response.sendRedirect("index.jsp?halaman=kelola_flights&status=gagal");
-                    }
+                if (dao.addFlight(f, originId, destId)) {
+                    response.sendRedirect("index.jsp?halaman=kelola_flights&status=sukses_tambah");
+                } else {
+                    response.sendRedirect("index.jsp?halaman=kelola_flights&status=gagal");
                 }
 
             /* =====================
-               UPDATE (EDIT)  ✅ BARU
+               UPDATE ✅
                ===================== */
             } else if ("update".equals(action)) {
 
@@ -63,9 +60,7 @@ public class FlightServlet extends HttpServlet {
 
                 String dateStr = request.getParameter("departure_time");
                 String cleanDate = dateStr.replace("T", " ");
-                if (cleanDate.length() == 16) {
-                    cleanDate += ":00";
-                }
+                if (cleanDate.length() == 16) cleanDate += ":00";
 
                 Flight f = new Flight();
                 f.setId(id);

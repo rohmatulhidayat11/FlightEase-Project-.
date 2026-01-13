@@ -13,6 +13,8 @@
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 %>
+
+<%-- BAGIAN NOTIFIKASI / ALERT --%>
 <%
     String status = request.getParameter("status");
     if(status != null) {
@@ -25,6 +27,11 @@
 <%      } else if(status.equals("sukses_hapus")) { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="bi bi-trash me-2"></i>Jadwal berhasil dihapus.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<%      } else if(status.equals("sukses_update")) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-pencil-square me-2"></i>Data penerbangan berhasil diperbarui.
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 <%      } else if(status.equals("gagal_hapus_fk")) { %>
@@ -40,6 +47,7 @@
 <%      }
     }
 %>
+
 <div class="row">
     <div class="col-md-4">
         <div class="card shadow border-0 mb-3">
@@ -117,19 +125,17 @@
                                 <td><%= sdf.format(f.getDepartureTime())%></td>
                                 <td class="text-success fw-bold"><%= f.getFormattedPrice()%></td>
                                 <td>
-                                    <!-- Tombol Edit -->
                                     <a href="index.jsp?halaman=edit_flight&id=<%= f.getId() %>"
                                        class="btn btn-sm btn-warning py-0 me-1"
                                        title="Edit Jadwal">
-                                        <i class="bi bi-pencil"></i>
+                                         <i class="bi bi-pencil"></i>
                                     </a>
 
-                                    <!-- Tombol Hapus -->
                                     <a href="FlightServlet?action=delete&id=<%= f.getId()%>" 
                                        class="btn btn-sm btn-danger py-0"
                                        onclick="return confirm('Hapus jadwal ini?')"
                                        title="Hapus Jadwal">
-                                        <i class="bi bi-x"></i>
+                                         <i class="bi bi-x"></i>
                                     </a>
                                 </td>
                             </tr>

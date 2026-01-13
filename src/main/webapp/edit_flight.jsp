@@ -1,84 +1,100 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.flightease.dao.FlightDAO"%>
 <%@page import="com.flightease.dao.AirportDAO"%>
 <%@page import="com.flightease.model.Flight"%>
 <%@page import="com.flightease.model.Airport"%>
 <%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
 
 <%
-    String idStr = request.getParameter("id");
-    Flight flight = null;
+    int id = Integer.parseInt(request.getParameter("id"));
 
-    if (idStr != null) {
-        int id = Integer.parseInt(idStr);
-        FlightDAO fDao = new FlightDAO();
-        flight = fDao.getFlightById(id);
-    }
-
-    if (flight == null) {
-%>
-    <h3>Data flight tidak ditemukan.</h3>
-<%
-        return;
-    }
-
+    FlightDAO fDao = new FlightDAO();
     AirportDAO aDao = new AirportDAO();
+
+    Flight flight = fDao.getFlightById(id);
     List<Airport> airports = aDao.getAllAirports();
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Flight</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<div class="card shadow border-0">
+    <div class="card-header bg-warning">
+        <h6 class="mb-0 fw-bold">
+            <i class="bi bi-pencil-square"></i> Edit Jadwal Penerbangan
+        </h6>
+    </div>
 
-<div class="container mt-4">
-    <h4 class="mb-3">Edit Jadwal Penerbangan</h4>
+    <div class="card-body">
+        <form action="FlightServlet" method="post">
 
-    <form action="FlightServlet" method="post">
-        <input type="hidden" name="action" value="update">
-        <input type="hidden" name="id" value="<%= flight.getId() %>">
+            <!-- WAJIB -->
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="id" value="<%= flight.getId() %>">
 
-        <div class="mb-2">
-            <label class="fw-bold">No. Penerbangan</label>
-            <input type="text" name="flight_number"
-                   class="form-control"
-                   value="<%= flight.getFlightNumber() %>" required>
-        </div>
+            <!-- Nomor Penerbangan -->
+            <div class="mb-3">
+                <label class="fw-bold">Nomor Penerbangan</label>
+                <input type="text" name="flight_number"
+                       class="form-control"
+                       value="<%= flight.getFlightNumber() %>" required>
+            </div>
 
-        <div class="mb-2">
-            <label class="fw-bold">Dari</label>
-            <select name="origin_id" class="form-select" required>
-                <% for(Airport a : airports) { %>
-                    <option value="<%= a.getId() %>"
-                        <%= a.getId() == flight.getOrigin().getId() ? "selected" : "" %>>
-                        <%= a.getCity() %> (<%= a.getCode() %>)
-                    </option>
-                <% } %>
-            </select>
-        </div>
+            <!-- Dari -->
+            <div class="mb-3">
+                <label class="fw-bold">Dari</label>
+                <select name="origin_id" class="form-select" required>
+                    <% for (Airport a : airports) { %>
+                        <option value="<%= a.getId() %>"
+                            <%= a.getCity().equals(flight.getOrigin().getCity()) ? "selected" : "" %>>
+                            <%= a.getCity() %> (<%= a.getCode() %>)
+                        </option>
+                    <% } %>
+                </select>
+            </div>
 
-        <div class="mb-2">
-            <label class="fw-bold">Ke</label>
-            <select name="destination_id" class="form-select" required>
-                <% for(Airport a : airports) { %>
-                    <option value="<%= a.getId() %>"
-                        <%= a.getId() == flight.getDestination().getId() ? "selected" : "" %>>
-                        <%= a.getCity() %> (<%= a.getCode() %>)
-                    </option>
-                <% } %>
-            </select>
-        </div>
+            <!-- Ke -->
+            <div class="mb-3">
+                <label class="fw-bold">Ke</label>
+                <select name="destination_id" class="form-select" required>
+                    <% for (Airport a : airports) { %>
+                        <option value="<%= a.getId() %>"
+                            <%= a.getCity().equals(flight.getDestination().getCity()) ? "selected" : "" %>>
+                            <%= a.getCity() %> (<%= a.getCode() %>)
+                        </option>
+                    <% } %>
+                </select>
+            </div>
 
-        <div class="mb-2">
-            <label class="fw-bold">Waktu Berangkat</label>
-            <input type="datetime-local"
-                   name="departure_time"
-                   class="form-control"
-                   required>
-        </div>
+            <!-- Waktu -->
+            <div class="mb-3">
+                <label class="fw-bold">Waktu Berangkat</label>
+                <input type="datetime-local"
+                       name="departure_time"
+                       class="form-control"
+                       value="<%= sdf.format(flight.getDepartureTime()) %>"
+                       required>
+            </div>
 
-        <div class="mb-3">
+            <!-- Harga -->
+            <div class="mb-3">
+                <label class="fw-bold">Harga Tiket (Rp)</label>
+                <input type="number"
+                       name="price"
+                       class="form-control"
+                       value="<%= flight.getPrice() %>"
+                       required>
+            </div>
+
+            <!-- Tombol -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Simpan Perubahan
+                </button>
+                <a href="index.jsp?halaman=kelola_flights" class="btn btn-secondary">
+                    Batal
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>

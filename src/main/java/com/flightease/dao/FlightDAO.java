@@ -9,7 +9,6 @@ import java.util.List;
 
 public class FlightDAO {
 
-    
     private Flight mapResultSetToFlight(ResultSet rs) throws SQLException {
         Flight f = new Flight();
         f.setId(rs.getInt("id"));
@@ -33,13 +32,13 @@ public class FlightDAO {
     public List<Flight> searchFlights(int originId, int destId, String tanggalStr) {
         List<Flight> list = new ArrayList<>();
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
-                   + "ao.city AS origin_city, ao.code AS origin_code, "
-                   + "ad.city AS dest_city, ad.code AS dest_code "
-                   + "FROM flights f "
-                   + "JOIN airports ao ON f.origin_id = ao.id "
-                   + "JOIN airports ad ON f.destination_id = ad.id "
-                   + "WHERE f.origin_id = ? AND f.destination_id = ? "
-                   + "AND CAST(f.departure_time AS DATE) = CAST(? AS DATE)";
+                + "ao.city AS origin_city, ao.code AS origin_code, "
+                + "ad.city AS dest_city, ad.code AS dest_code "
+                + "FROM flights f "
+                + "JOIN airports ao ON f.origin_id = ao.id "
+                + "JOIN airports ad ON f.destination_id = ad.id "
+                + "WHERE f.origin_id = ? AND f.destination_id = ? "
+                + "AND CAST(f.departure_time AS DATE) = CAST(? AS DATE)";
 
         try (Connection conn = KoneksiDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -61,12 +60,12 @@ public class FlightDAO {
     public List<Flight> getAllFlights() {
         List<Flight> list = new ArrayList<>();
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
-                   + "ao.city AS origin_city, ao.code AS origin_code, "
-                   + "ad.city AS dest_city, ad.code AS dest_code "
-                   + "FROM flights f "
-                   + "JOIN airports ao ON f.origin_id = ao.id "
-                   + "JOIN airports ad ON f.destination_id = ad.id "
-                   + "ORDER BY f.departure_time DESC";
+                + "ao.city AS origin_city, ao.code AS origin_code, "
+                + "ad.city AS dest_city, ad.code AS dest_code "
+                + "FROM flights f "
+                + "JOIN airports ao ON f.origin_id = ao.id "
+                + "JOIN airports ad ON f.destination_id = ad.id "
+                + "ORDER BY f.departure_time DESC";
 
         try (Connection conn = KoneksiDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -84,12 +83,12 @@ public class FlightDAO {
     public Flight getFlightById(int id) {
         Flight f = null;
         String sql = "SELECT f.id, f.flight_number, f.departure_time, f.price, "
-                   + "ao.city AS origin_city, ao.code AS origin_code, "
-                   + "ad.city AS dest_city, ad.code AS dest_code "
-                   + "FROM flights f "
-                   + "JOIN airports ao ON f.origin_id = ao.id "
-                   + "JOIN airports ad ON f.destination_id = ad.id "
-                   + "WHERE f.id = ?";
+                + "ao.city AS origin_city, ao.code AS origin_code, "
+                + "ad.city AS dest_city, ad.code AS dest_code "
+                + "FROM flights f "
+                + "JOIN airports ao ON f.origin_id = ao.id "
+                + "JOIN airports ad ON f.destination_id = ad.id "
+                + "WHERE f.id = ?";
 
         try (Connection conn = KoneksiDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -105,9 +104,7 @@ public class FlightDAO {
         return f;
     }
 
-    // =====================
     // CREATE
-    // =====================
     public boolean addFlight(Flight f, int originId, int destId) {
         String sql = "INSERT INTO flights (flight_number, origin_id, destination_id, departure_time, price) "
                    + "VALUES (?, ?, ?, ?, ?)";
@@ -128,9 +125,7 @@ public class FlightDAO {
         }
     }
 
-    // =====================
     // DELETE
-    // =====================
     public boolean deleteFlight(int id) {
         String sql = "DELETE FROM flights WHERE id = ?";
 
@@ -145,13 +140,10 @@ public class FlightDAO {
         }
     }
 
-    // =====================
-    // UPDATE  ✅ BARU
-    // =====================
+    // UPDATE ✅
     public boolean updateFlight(Flight f, int originId, int destId) {
-        String sql = "UPDATE flights SET flight_number = ?, origin_id = ?, "
-                   + "destination_id = ?, departure_time = ?, price = ? "
-                   + "WHERE id = ?";
+        String sql = "UPDATE flights SET flight_number=?, origin_id=?, "
+                   + "destination_id=?, departure_time=?, price=? WHERE id=?";
 
         try (Connection conn = KoneksiDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {

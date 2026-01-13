@@ -43,7 +43,7 @@
     <div class="col-12">
         <h5 class="text-secondary fw-bold text-uppercase mb-3 ps-2 border-start border-4 border-warning">Entity Relationship Diagram (ERD)</h5>
         <div class="erd-container">
-            <img src="images/ERD DATABASES.png.jpeg" 
+            <img src="images/SKEMA DATABASE.png" 
                  class="erd-image" alt="Skema Database ERD">
             
             <div class="mt-3 text-muted small">
