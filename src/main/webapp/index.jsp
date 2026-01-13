@@ -56,6 +56,11 @@
                         %>
                             <jsp:include page="admin_flights.jsp" />
                         <%
+                            } else if (halaman.equals("edit_flight")) {
+                        %>    
+                            <jsp:include page="edit_flight.jsp" />
+}
+                        <%
                             } else if (halaman.equals("laporan_bookings")) {
                         %>
                             <jsp:include page="admin_bookings.jsp" />

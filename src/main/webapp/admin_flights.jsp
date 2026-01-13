@@ -117,9 +117,18 @@
                                 <td><%= sdf.format(f.getDepartureTime())%></td>
                                 <td class="text-success fw-bold"><%= f.getFormattedPrice()%></td>
                                 <td>
+                                    <!-- Tombol Edit -->
+                                    <a href="index.jsp?halaman=edit_flight&id=<%= f.getId() %>"
+                                       class="btn btn-sm btn-warning py-0 me-1"
+                                       title="Edit Jadwal">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <!-- Tombol Hapus -->
                                     <a href="FlightServlet?action=delete&id=<%= f.getId()%>" 
                                        class="btn btn-sm btn-danger py-0"
-                                       onclick="return confirm('Hapus jadwal ini?')">
+                                       onclick="return confirm('Hapus jadwal ini?')"
+                                       title="Hapus Jadwal">
                                         <i class="bi bi-x"></i>
                                     </a>
                                 </td>
